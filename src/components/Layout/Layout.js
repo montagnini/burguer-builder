@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Toolbar from '../Navigation/Toolbar/Toolbar';
+import SideDrawer from '../Navigation/SideDrawer/SideDrawer';
 
 const Main = styled.main`
     margin-top: 72px;
@@ -10,8 +11,8 @@ const Main = styled.main`
 const layout = props => {
     return (
     <>
-            <Toolbar>
-            </Toolbar>
+            <Toolbar/>
+            <SideDrawer/>
             <Main>
                 {props.children}
             </Main>

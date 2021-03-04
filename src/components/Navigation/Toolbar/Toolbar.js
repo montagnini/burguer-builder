@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import Logo from '../../Layout/Logo/Logo';
+import NavgationItems from '../NavgationItems/NavgationItems';
+
 const Toolbar = styled.header`
     height: 56px;
     width: 100%;
@@ -14,19 +17,25 @@ const Toolbar = styled.header`
     padding: 0 20px;
     box-sizing: border-box;
     z-index: 90;
+
+
     
 `;
 
 const Nav = styled.nav`
-    height: 100%;
+    @media(max-width: 499px){
+        display: none;
+    }
+
 `;
+
 const toolbar = props => {
     return (
         <Toolbar>
             <div>MENU</div>
-            <div>LOGO</div>
+            <Logo />
             <Nav>
-                ...
+                <NavgationItems/>
             </Nav>
         </Toolbar>
     );

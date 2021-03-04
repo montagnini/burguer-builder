@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import Burguer from '../../components/Burguer/Burguer';
-import BuilderControls from '../../components/BuildControls/BuildControls';
+import BuilderControls from '../../components/Burguer/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
-import OrderSummary from '../../components/BuildControls/OrderSummary/OrderSummary';
+import OrderSummary from '../../components/Burguer/BuildControls/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -83,6 +83,8 @@ const BurguerBuilder = props => {
         }));
     }
 
+
+
     const purchaseContinueHander = () => {
         alert('You continue!!!');
     }
@@ -104,6 +106,7 @@ const BurguerBuilder = props => {
                 removeIngredient={removeIngredientHandler}
                 purchasable={state.purchasable}
                 ordered={purchaseHandler}
+                ingredients={state.ingredients}
             />
         </>
     );

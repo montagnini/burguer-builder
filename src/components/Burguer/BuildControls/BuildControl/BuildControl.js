@@ -64,6 +64,7 @@ const buildControl = props => {
             <ControlLabel>{props.label}</ControlLabel>
             <ControlButton className='more' onClick={props.add}> + </ControlButton>
             <ControlButton className='less' onClick={props.remove}> - </ControlButton>
+            <strong style={{marginLeft: '10px'}}>{props.value}</strong>
         </ControlDiv>);
 }
 

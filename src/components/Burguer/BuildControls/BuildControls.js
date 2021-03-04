@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import BuildControl from './BuildControl/BuildControl';
 
 const controls = [
-    { label: 'Salad', type: 'salad' },
-    { label: 'Bacon', type: 'bacon' },
-    { label: 'Cheese', type: 'cheese' },
-    { label: 'Meat', type: 'meat' },
+    { label: 'Salad', type: 'salad', value: 0 },
+    { label: 'Bacon', type: 'bacon', value: 0 },
+    { label: 'Cheese', type: 'cheese', value: 0 },
+    { label: 'Meat', type: 'meat', value: 0 },
 ];
 
-const BuildControls = styled.div`
+const BuildControls = styled.footer`
     width: 100%;
     background-color: #CF8F2E;
     display: flex;
@@ -46,12 +46,14 @@ const OrderButton = styled.button`
     }
 `;
 const buildControls = props => {
+    
     return (
         <BuildControls>
             <p>Current Price: <strong>${props.price}</strong></p>
             {controls.map(ctrol => (
                 <BuildControl key={ctrol.label}
                     label={ctrol.label}
+                    value={props.ingredients[ctrol.type]}
                     add={() => props.addIngredient(ctrol.type)}
                     remove={() => props.removeIngredient(ctrol.type)} />
             ))}
