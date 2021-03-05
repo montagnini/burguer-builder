@@ -94,10 +94,10 @@ const BurguerBuilder = props => {
             <Modal show={state.purchasing}
                 modalClosed={purchaseCancelHandler}>
                 <OrderSummary
-                    ingredients={state.ingredients} 
+                    ingredients={state.ingredients}
                     purchaseCancelled={purchaseCancelHandler}
                     purchaseContinue={purchaseContinueHander}
-                    totalPrice={state.totalPrice.toFixed(2)}/>
+                    totalPrice={state.totalPrice.toFixed(2)} />
             </Modal>
             <Burguer ingredients={state.ingredients} />
             <BuilderControls

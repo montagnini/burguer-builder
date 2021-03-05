@@ -13,6 +13,9 @@ const controls = [
 const BuildControls = styled.footer`
     width: 100%;
     background-color: #CF8F2E;
+    position: fixed;
+    left: 0;
+    bottom: 0;
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -61,7 +64,7 @@ const buildControls = props => {
                 disabled={!props.purchasable}
                 onClick={props.ordered}>
                 Order Now
-                </OrderButton>
+            </OrderButton>
         </BuildControls>
     );
 }

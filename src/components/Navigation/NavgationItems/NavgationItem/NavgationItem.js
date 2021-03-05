@@ -14,10 +14,10 @@ const NavgationItem = styled.li`
         display: flex;
         height: 100%;
         align-items: center;
+        white-space: nowrap;
     }
-`;
 
-const Link = styled.a`
+    & a{
         color: #8F5C2C;
         text-decoration: none;
         width: 100%;
@@ -28,9 +28,8 @@ const Link = styled.a`
         &:hover, &:active, &.active{
             color: #40A4C8;
         }
-    
-    
-    @media(min-width: 500px){
+
+        @media(min-width: 500px){
         color: white;
         text-decoration: none;
         height: 100%;
@@ -44,19 +43,22 @@ const Link = styled.a`
         background-color: #8F5C2C;
         border-bottom: 4px solid #40A4C8;
         color: white;
-    }
+        }
 
     }
+    
+    }
 `;
+
 
 const navgationItem = props => {
     return (
         <NavgationItem>
-            <Link
+            <a
                 className={props.active ? "active" : null}
                 href={props.link}>
                 {props.children}
-            </Link>
+            </a>
         </NavgationItem>
     );
 }

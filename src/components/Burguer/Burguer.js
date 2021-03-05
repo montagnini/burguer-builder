@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import BurguerIngredient from './BurguerIngredient/BurguerIngredient';
 
 const Burguer = styled.div`
-    width: 100;
+     width: 100%;
     margin: auto;
     height: 250px;
+    overflow: auto;
     text-align: center;
     font-weight: bold;
     font-size: 1.2rem;
@@ -36,13 +37,13 @@ const burguer = props => {
         return prev.concat(actual);
     }, []);
 
-    if(ingredientsList.length === 0){
+    if (ingredientsList.length === 0) {
         ingredientsList = <h1> Please start adding ingredients!</h1>;
     }
     return (<Burguer>
-             <BurguerIngredient type='bread-top' />
-             {ingredientsList}
-             <BurguerIngredient type='bread-bottom' />
+        <BurguerIngredient type='bread-top' />
+        {ingredientsList}
+        <BurguerIngredient type='bread-bottom' />
     </Burguer>
     );
 };

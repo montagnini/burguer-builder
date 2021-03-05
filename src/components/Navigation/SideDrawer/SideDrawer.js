@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Logo from '../../Layout/Logo/Logo';
+import Logo from '../../../containers/Layout/Logo/Logo';
 import NavgationItems from '../NavgationItems/NavgationItems';
+import Backdrop from '../../UI/Backdrop/Backdrop';
 
 
 const SideDrawer = styled.div`
@@ -16,7 +17,7 @@ const SideDrawer = styled.div`
     background-color: white;
     padding: 32px 16px;
     box-sizing: border-box;
-    transition: transform 0.3 ease-in-out;
+    transition: transform 0.5s ease-in-out;
 
     @media(min-width: 500px){
         display: none;
@@ -34,12 +35,15 @@ const SideDrawer = styled.div`
 
 const sideDrawer = props => {
     return (
-        <SideDrawer >
-            <Logo height='11%' marginBottom=''/>
-            <nav style={{ height: '100%' }}>
-                <NavgationItems />
-            </nav>
-        </SideDrawer>
+        <>
+            <Backdrop show={props.show} onClick={props.closed}/>
+            <SideDrawer className={props.show ? 'Open' : 'Close'}>
+                <Logo height='11%' marginBottom='' />
+                <nav style={{ height: '100%' }}>
+                    <NavgationItems />
+                </nav>
+            </SideDrawer>
+        </>
     );
 }
 
