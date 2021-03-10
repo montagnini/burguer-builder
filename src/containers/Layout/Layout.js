@@ -11,7 +11,7 @@ const Main = styled.main`
 
 const Layout = props => {
     const [state, setState] = useState({
-        showSideDrawer: true
+        showSideDrawer: false
     });
 
     const sideDrawerClosedHandler = () => {

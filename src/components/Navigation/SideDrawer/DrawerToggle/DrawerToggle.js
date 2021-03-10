@@ -26,7 +26,9 @@ const DrawerToggle = styled.div`
 const drawerToggle = props => {
     return (
         <DrawerToggle onClick={props.onClick}>
-            <div /><div /><div />
+            <div />
+            <div />
+            <div />
         </DrawerToggle>);
 
 }

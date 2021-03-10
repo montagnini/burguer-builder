@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import BurguerIngredient from './BurguerIngredient/BurguerIngredient';
 
 const Burguer = styled.div`
-     width: 100%;
+    width: 100%;
     margin: auto;
     height: 250px;
     overflow: auto;
@@ -40,11 +40,12 @@ const burguer = props => {
     if (ingredientsList.length === 0) {
         ingredientsList = <h1> Please start adding ingredients!</h1>;
     }
-    return (<Burguer>
-        <BurguerIngredient type='bread-top' />
-        {ingredientsList}
-        <BurguerIngredient type='bread-bottom' />
-    </Burguer>
+    return (
+        <Burguer>
+            <BurguerIngredient type='bread-top' />
+            {ingredientsList}
+            <BurguerIngredient type='bread-bottom' />
+        </Burguer>
     );
 };
 
