@@ -11,7 +11,19 @@ const Burger = styled.div`
     overflow: auto;
     text-align: center;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1.2rem; 
+
+    @media (min-width: 300px) and (max-height: 600px){
+        height: 170px;
+    }
+
+    @media (min-width: 300px) and (min-height: 650px){
+        height: 275px;
+    }
+
+    @media (min-width: 350px) and (min-height: 800px){
+        height: 410px;
+    }
 
     @media (min-width: 400px) and (min-height: 800px){
         height: 425px;
@@ -26,10 +38,22 @@ const Burger = styled.div`
         width: 450px;
         height: 400px;
     }
+    
+    @media (min-width: 400px) and (max-width: 550px) and (max-height: 750px){
+        height: 330px;
+    }
+
+    @media (min-width: 700px) and (min-height: 1000px){
+        height: 625px;
+    }
 
     @media (min-width: 1000px) and (min-height: 700px){
         width: 700px;
         height: 500px;
+    }
+
+    @media (min-width: 1000px) and (min-height: 1200px){
+        height: 965px;
     }
 
     @media (min-width: 1500px) and (min-height: 1000px){
