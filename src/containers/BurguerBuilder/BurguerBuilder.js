@@ -6,6 +6,7 @@ import BuilderControls from '../../components/Burguer/BuildControls/BuildControl
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burguer/BuildControls/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
+import withErrorHandler from '../../containers/withErrorHandler/withErrorHandler';
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -156,6 +157,6 @@ const BurguerBuilder = props => {
     );
 }
 
-export default BurguerBuilder;
+export default withErrorHandler(BurguerBuilder, axios);
 
 
