@@ -38,5 +38,6 @@ const modal = props => {
 }
 
 export default React.memo(modal,(prevState, nextState) => {
-        return prevState.show === nextState.show;
+        return prevState.show === nextState.show
+        && prevState.children === nextState.children;
 });

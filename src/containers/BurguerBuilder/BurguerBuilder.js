@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import axios from '../../axios-orders';
 
 import Burguer from '../../components/Burguer/Burguer';
 import BuilderControls from '../../components/Burguer/BuildControls/BuildControls';
 import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burguer/BuildControls/OrderSummary/OrderSummary';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -23,7 +25,8 @@ const BurguerBuilder = props => {
         },
         totalPrice: 4,
         purchasable: false,
-        purchasing: false
+        purchasing: false,
+        loading: false
     });
 
     const purchaseHandler = () => {
@@ -40,11 +43,12 @@ const BurguerBuilder = props => {
             }).reduce((sum, element) => {
                 return sum + element;
             }, 0);
-        setState({
+        setState(prevState => ({
+            ...prevState,
             ingredients: ingredients,
             totalPrice: price,
             purchasable: sum > 0
-        });
+        }));
     }
 
     const addIngredientHandler = type => {
@@ -83,21 +87,61 @@ const BurguerBuilder = props => {
         }));
     }
 
+    const purchaseContinueHandler = () => {
 
+        setState(prevState => ({
+            ...prevState,
+            loading: true
+        }));
 
-    const purchaseContinueHander = () => {
-        alert('You continue!!!');
+        const order = {
+            ingredients: state.ingredients,
+            price: state.totalPrice,
+            costumer: {
+                name: 'Wellington Montagnini',
+                addres: {
+                    street: 'blabla',
+                    zipCode: '8080808',
+                    country: 'Brazil'
+                },
+                email: 'we.montagnini@gmail.com'
+            },
+            deliveryMethod: 'fastest'
+        };
+        axios.post('/orders.json', order)
+            .then(response => {
+                console.log(state);
+                setState(prevState => ({
+                    ...prevState,
+                    purchasing: false,
+                    loading: false
+                }));
+            })
+            .catch(error => {
+                setState(prevState => ({
+                    ...prevState,
+                    purchasing: false,
+                    loading: false
+                }));
+            });
+        console.log(state);
+    }
+    let modalContent = <Spinner />;
+
+    if (!state.loading) {
+
+        modalContent = <OrderSummary
+            ingredients={state.ingredients}
+            purchaseCancelled={purchaseCancelHandler}
+            purchaseContinue={purchaseContinueHandler}
+            totalPrice={state.totalPrice.toFixed(2)} />
     }
 
     return (
         <>
             <Modal show={state.purchasing}
                 modalClosed={purchaseCancelHandler}>
-                <OrderSummary
-                    ingredients={state.ingredients}
-                    purchaseCancelled={purchaseCancelHandler}
-                    purchaseContinue={purchaseContinueHander}
-                    totalPrice={state.totalPrice.toFixed(2)} />
+                {modalContent}
             </Modal>
             <Burguer ingredients={state.ingredients} />
             <BuilderControls
@@ -113,3 +157,5 @@ const BurguerBuilder = props => {
 }
 
 export default BurguerBuilder;
+
+
