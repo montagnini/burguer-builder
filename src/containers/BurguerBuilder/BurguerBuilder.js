@@ -18,17 +18,29 @@ const INGREDIENT_PRICES = {
 const BurguerBuilder = props => {
 
     const [state, setState] = useState({
-        ingredients: {
-            salad: 0,
-            bacon: 0,
-            cheese: 0,
-            meat: 0
-        },
+        ingredients: null,
         totalPrice: 4,
         purchasable: false,
         purchasing: false,
-        loading: false
+        loading: false,
+        error: false
     });
+
+    useEffect(() => {
+        axios.get('https://react-burger-builder-2eb3b-default-rtdb.firebaseio.com/ingredients.json')
+            .then(response => {
+                setState(prevState => ({
+                    ...prevState,
+                    ingredients: response.data
+                }))
+            }).catch(error => {
+                setState(prevState => ({
+                    ...prevState,
+                    error: true
+                }));
+            });
+    },[]);
+
 
     const purchaseHandler = () => {
         setState(prevState => ({
@@ -127,15 +139,33 @@ const BurguerBuilder = props => {
             });
         console.log(state);
     }
-    let modalContent = <Spinner />;
+    let modalContent = null;
+    let burger = state.error? <p>Ingredients can't be loaded </p> : <Spinner />;
 
-    if (!state.loading) {
+    if (state.ingredients) {
+        burger = (
+            <>
+                <Burguer ingredients={state.ingredients} />
+                <BuilderControls
+                    price={state.totalPrice.toFixed(2)}
+                    addIngredient={addIngredientHandler}
+                    removeIngredient={removeIngredientHandler}
+                    purchasable={state.purchasable}
+                    ordered={purchaseHandler}
+                    ingredients={state.ingredients} />
+            </>
+        );
 
-        modalContent = <OrderSummary
+        modalContent = (<OrderSummary
             ingredients={state.ingredients}
             purchaseCancelled={purchaseCancelHandler}
             purchaseContinue={purchaseContinueHandler}
-            totalPrice={state.totalPrice.toFixed(2)} />
+            totalPrice={state.totalPrice.toFixed(2)} />);
+    }
+
+
+    if (state.loading) {
+        modalContent = <Spinner />;
     }
 
     return (
@@ -144,15 +174,7 @@ const BurguerBuilder = props => {
                 modalClosed={purchaseCancelHandler}>
                 {modalContent}
             </Modal>
-            <Burguer ingredients={state.ingredients} />
-            <BuilderControls
-                price={state.totalPrice.toFixed(2)}
-                addIngredient={addIngredientHandler}
-                removeIngredient={removeIngredientHandler}
-                purchasable={state.purchasable}
-                ordered={purchaseHandler}
-                ingredients={state.ingredients}
-            />
+            {burger}
         </>
     );
 }
