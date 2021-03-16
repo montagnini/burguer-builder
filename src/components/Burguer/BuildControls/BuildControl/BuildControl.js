@@ -64,7 +64,9 @@ const buildControl = props => {
             <ControlLabel>{props.label}</ControlLabel>
             <ControlButton className='more' onClick={props.add}> + </ControlButton>
             <ControlButton className='less' onClick={props.remove}> - </ControlButton>
-            <strong style={{marginLeft: '10px'}}>{props.value}</strong>
+            <strong style={{marginLeft: '10px'}}>{props.amount}</strong>
+            <p style={{marginLeft: '10px'}}>${props.price.toFixed(2)}</p>
+            <p style={{marginLeft: '5px'}}>(${(props.price*props.amount).toFixed(2)})</p>
         </ControlDiv>);
 }
 

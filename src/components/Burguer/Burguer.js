@@ -75,7 +75,7 @@ const Burger = styled.div`
 const burguer = props => {
     //Obtém lista de componentes de ingredientes através do parametro recebido.
     let ingredientsList = Object.keys(props.ingredients).map(igKey => {
-        return [...Array(props.ingredients[igKey])].map((_, i) => {
+        return [...Array(props.ingredients[igKey].amount)].map((_, i) => {
             return <BurguerIngredient key={igKey + i} type={igKey} />
         });
     }).reduce((prev, actual) => {
