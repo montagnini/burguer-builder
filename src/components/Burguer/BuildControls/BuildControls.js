@@ -49,17 +49,30 @@ const OrderButton = styled.button`
     }
 `;
 const buildControls = props => {
+    //Obtém lista de ingredientes
+    let listOfControls = Object.keys(props.ingredients).map(igKey => {
+        //Retorna um array 
+        return [...Array(props.ingredients[igKey])].map((_,i) => {
+            //Obtém se é pra exibir o controle de ingrediente na tela.
+            return props.ingredients[igKey].show ?
+            <BuildControl 
+                    key={props.ingredients[igKey].label}
+                    label={props.ingredients[igKey].label}
+                    amount={props.ingredients[igKey].amount}
+                    price={props.ingredients[igKey].value}
+                    add={() => props.addIngredient(igKey)}
+                    remove={() => props.removeIngredient(igKey)} />
+            : null;
+        })
+        //Transforma em objeto.
+    }).reduce((prev, actual) => {
+        return prev.concat(actual);
+    },[]);
     
     return (
         <BuildControls>
-            <p>Current Price: <strong>${props.price}</strong></p>
-            {controls.map(ctrol => (
-                <BuildControl key={ctrol.label}
-                    label={ctrol.label}
-                    value={props.ingredients[ctrol.type]}
-                    add={() => props.addIngredient(ctrol.type)}
-                    remove={() => props.removeIngredient(ctrol.type)} />
-            ))}
+            <p>Current Price: <strong>${props.price}</strong></p>          
+            { listOfControls}
             <OrderButton
                 disabled={!props.purchasable}
                 onClick={props.ordered}>
