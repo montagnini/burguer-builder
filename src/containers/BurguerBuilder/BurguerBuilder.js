@@ -105,12 +105,27 @@ const BurguerBuilder = props => {
     const purchaseContinueHandler = () => {
         //Define o estado 'carregando' como verdadeiro.
         setLoadingState(true);
+
+        let ingredients = Object.keys(ingredientsState).map(igKey => {
+            //Retorna um array 
+            return [...Array(ingredientsState[igKey])].map((_,i) => {
+                //Obtém se é pra exibir o controle de ingrediente na tela.
+                return {type: igKey, amount: ingredientsState[igKey].amount}
+            })
+            //Transforma em objeto.
+        }).reduce((prev, actual) => 
+        {
+            return prev.concat(actual);
+        });
+        
+        console.log(ingredients)
+
         //Por enquanto define o pedido como os ingredientes e o preço definidos e adiciona um usuário estático.
         const order = {
             ingredients: ingredientsState,
             price: totalPriceState,
             costumer: {
-                name: 'Wellington Montagnini',
+                name: 'Zé Montagnini',
                 addres: {
                     street: 'blabla',
                     zipCode: '8080808',

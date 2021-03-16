@@ -21,16 +21,19 @@ const burguerIngredient = props => {
             );
             break;
         case ('meat'):
-            ingredient = <div className='Meat'></div>;
+            ingredient = <div className='Meat'/>;
             break;
         case ('cheese'):
-            ingredient = <div className='Cheese'></div>;
+            ingredient = <div className='Cheese'/>;
             break;
         case ('salad'):
-            ingredient = <div className='Salad'></div>;
+            ingredient = <div className='Salad'/>;
             break;
         case ('bacon'):
-            ingredient = <div className='Bacon'></div>;
+            ingredient = <div className='Bacon'/>;
+            break;
+        case ('egg'):
+            ingredient = <div className='Egg'/>;
             break;
         default:
             ingredient = null;

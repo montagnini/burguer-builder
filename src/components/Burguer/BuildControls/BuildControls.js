@@ -3,13 +3,6 @@ import styled from 'styled-components';
 
 import BuildControl from './BuildControl/BuildControl';
 
-const controls = [
-    { label: 'Salad', type: 'salad', value: 0 },
-    { label: 'Bacon', type: 'bacon', value: 0 },
-    { label: 'Cheese', type: 'cheese', value: 0 },
-    { label: 'Meat', type: 'meat', value: 0 },
-];
-
 const BuildControls = styled.footer`
     width: 100%;
     background-color: #CF8F2E;
@@ -22,6 +15,29 @@ const BuildControls = styled.footer`
     box-shadow: 0 2px 1px #ccc;
     margin: auto;
     padding: 10px 0;
+    max-height: 25%;
+    overflow-y: auto;
+
+    /* width */
+&::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+&::-webkit-scrollbar-track {
+  background: #CF8F2E;
+}
+
+/* Handle */
+&::-webkit-scrollbar-thumb {
+  background: #8F5E1E;
+}
+
+/* Handle on hover */
+&::-webkit-scrollbar-thumb:hover {
+  background: #703B09;
+}
+
 `;
 
 const OrderButton = styled.button`
@@ -52,26 +68,26 @@ const buildControls = props => {
     //Obtém lista de ingredientes
     let listOfControls = Object.keys(props.ingredients).map(igKey => {
         //Retorna um array 
-        return [...Array(props.ingredients[igKey])].map((_,i) => {
+        return [...Array(props.ingredients[igKey])].map((_, i) => {
             //Obtém se é pra exibir o controle de ingrediente na tela.
             return props.ingredients[igKey].show ?
-            <BuildControl 
+                <BuildControl
                     key={props.ingredients[igKey].label}
                     label={props.ingredients[igKey].label}
                     amount={props.ingredients[igKey].amount}
                     price={props.ingredients[igKey].value}
                     add={() => props.addIngredient(igKey)}
                     remove={() => props.removeIngredient(igKey)} />
-            : null;
+                : null;
         })
         //Transforma em objeto.
     }).reduce((prev, actual) => {
         return prev.concat(actual);
-    },[]);
-    
+    }, []);
+
     return (
         <BuildControls>
-            <p>Current Price: <strong>${props.price}</strong></p>          
+            <p>Current Price: <strong>${props.price}</strong></p>
             { listOfControls}
             <OrderButton
                 disabled={!props.purchasable}
